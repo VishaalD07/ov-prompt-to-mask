@@ -199,6 +199,20 @@ The project includes a browser-based interactive demo.
 
 ---
 
+## 🔭 Future Work
+
+- **⚡ Speed up the pipeline** — Replace SAM-2 Large with SAM-2 Tiny to substantially improve throughput. The full pipeline currently runs at ~0.3 FPS (3.5 s/frame on T4) due to SAM-2's propagation cost, which rules out live surveillance. SAM-2 Tiny would cut this significantly at modest quality cost.
+
+- **🔄 Keyframe re-detection** — Currently YOLO-World only runs on frame 0. Adding re-detection every N frames would handle objects that enter or exit the scene mid-video, which the current pipeline misses entirely.
+
+- **🗂️ Joint VisDrone + COCO training** — COCO data for the 6 overlapping classes (person, bicycle, car, motorcycle, bus, truck) was fully preprocessed but not used during fine-tuning. Training jointly on both datasets would test whether ground-level examples of overlapping categories improve aerial detection further.
+
+- **✂️ Domain-specific SAM-2 adaptation** — VisDrone has no pixel-level segmentation ground truth, so SAM-2 was used pretrained. Annotating even a small subset of VisDrone images with masks and fine-tuning SAM-2 on them could improve segmentation quality on tiny aerial objects.
+
+- **🌐 Broader open-vocabulary testing** — The current NLP demo showed CLIP alignment works well for concrete object nouns but fails on action-based prompts ("object in motion"). Training with region-level text supervision could extend the vocabulary to cover attributes and actions.
+
+---
+
 ## 📜 References
 
 1. P. Zhu et al., "Detection and Tracking Meet Drones Challenge," *IEEE TPAMI*, 2021.
